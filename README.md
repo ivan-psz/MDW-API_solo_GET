@@ -18,21 +18,13 @@ Antes de explicar las peticiones, a continuación, se presenta el desglose de lo
 
 ```
 estudiantes/
-
 ├── activos/
-
 ├── genero/
-
 │  ├── semestre
-
 │  └── creditos_max
-
 ├── semestre/
-
 │  └── porcentaje_min
-
 └── carrera/
-
 └── materias_min
 ```
 
