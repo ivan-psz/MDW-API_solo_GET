@@ -6,7 +6,7 @@ Para esta actividad se realizó una API en la que, a partir de peticiones GET y 
 
 Se generaron dos archivos: `models.py` y `main.py`. El primero de ellos es el que contiene el modelo utilizado para almacenar datos, los cuales lee a partir de un archivo CSV de nombre `Base_Datos.csv`; para ello se utilizaron las bibliotecas `pydantic`, `csv` y `sys`.
 
-Con respecto al modelo creado, este es una clase llamada `Estudiante` que hereda de `BaseModel`, clase propia de la biblioteca `pydantic`, y contiene los campos de la base de datos creada en sesiones anteriores. Este modelo se puede comprender de mejor manera con el diagrama ER presentado en la figura 1 en el archivo `Pérez_Sánchez-Actividad_1`.
+Con respecto al modelo creado, este es una clase llamada `Estudiante` que hereda de `BaseModel`, clase propia de la biblioteca `pydantic`, y contiene los campos de la base de datos creada en sesiones anteriores. Este modelo se puede comprender de mejor manera con el diagrama ER presentado en la figura 1 en el [archivo PDF](https://github.com/ivan-psz/MDW-API_solo_GET/blob/main/P%C3%A9rez_S%C3%A1nchez-Actividad_1.pdf).
 
 Por otro lado, se tiene una función llamada `load_students()` que se encarga de leer el archivo CSV y generar, a partir de él, una lista de objetos de tipo `Estudiante`. Cuando acaba de leer el archivo, retorna dicha lista; sin embargo, si llega a haber un problema al abrirlo o leerlo, se marca una excepción y se finaliza la ejecución del programa.
 
