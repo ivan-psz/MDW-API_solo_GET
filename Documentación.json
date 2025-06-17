@@ -1,0 +1,441 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/estudiantes": {
+      "get": {
+        "summary": "Get All",
+        "description": "Primer nivel: /estudiantes\n\n- Si se proporciona `carrera`, filtra la lista por ese valor.\n- Si no, devuelve todos los estudiantes.\n\nParámetros de consulta:\n- carrera (opcional): Nombre de la carrera a filtrar.\n\nRetorna:\n    Lista de estudiantes.",
+        "operationId": "get_all_estudiantes_get",
+        "parameters": [
+          {
+            "name": "carrera",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Carrera"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estudiantes/activos": {
+      "get": {
+        "summary": "Get Enrolled Students",
+        "description": "Segundo nivel: /estudiantes/activos\n\n- Devuelve sólo los estudiantes con estatus == 'Activo'.\n- Si no hay ninguno, retorna un mensaje informativo.\n\nRetorna:\n    Lista de estudiantes activos o un dict con mensaje.",
+        "operationId": "get_enrolled_students_estudiantes_activos_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estudiantes/{matricula}": {
+      "get": {
+        "summary": "Get Student By School Id",
+        "description": "Primer nivel: /estudiantes/{matricula}\n\nParámetro del path:\n- matricula: Matrícula del estudiante a buscar.\n\nRetorna:\n    Instancia de Estudiante si existe, o un dict de error.",
+        "operationId": "get_student_by_school_id_estudiantes__matricula__get",
+        "parameters": [
+          {
+            "name": "matricula",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Matricula"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estudiantes/genero/{genero}": {
+      "get": {
+        "summary": "Get Students By Gender",
+        "description": "Segundo nivel: /estudiantes/genero/{genero}\n\nParámetro de path:\n- genero: Género a filtrar ('Femenino' o 'Masculino').\n\nRetorna:\n    Lista de estudiantes o dict de error si no hay coincidencias.",
+        "operationId": "get_students_by_gender_estudiantes_genero__genero__get",
+        "parameters": [
+          {
+            "name": "genero",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Genero"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estudiantes/semestre/{semestre}": {
+      "get": {
+        "summary": "Get Students By Semester",
+        "description": "Segundo nivel: /estudiantes/semestre/{semestre}\n\nParámetro de path:\n- semestre: Número de semestre a filtrar.\n\nRetorna:\n    Lista de estudiantes o dict de error si no hay coincidencias.",
+        "operationId": "get_students_by_semester_estudiantes_semestre__semestre__get",
+        "parameters": [
+          {
+            "name": "semestre",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Semestre"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estudiantes/genero/{genero}/semestre/{semestre}": {
+      "get": {
+        "summary": "Get Students By Gender Semester",
+        "description": "Tercer nivel: /estudiantes/genero/{genero}/semestre/{semestre}\n\nParámteros de path:\n- genero: Género.\n- semestre: Semestre.\n\nRetorna:\n    Lista combinada o dict de error si no hay coincidencias.",
+        "operationId": "get_students_by_gender_semester_estudiantes_genero__genero__semestre__semestre__get",
+        "parameters": [
+          {
+            "name": "genero",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Genero"
+            }
+          },
+          {
+            "name": "semestre",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Semestre"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estudiantes/semestre/{semestre}/porcentaje_min/{porcentaje_min}": {
+      "get": {
+        "summary": "Get Students By Semester Percentage",
+        "description": "Tercer nivel: /estudiantes/semestre/{semestre}/porcentaje_min/{porcentaje_min}\n\nParámetros de path:\n- semestre: Semestre.\n- porcentaje_min: Porcentaje avanzado mínimo.\n\nRetorna:\n    Lista o dict de error si no hay coincidencias.",
+        "operationId": "get_students_by_semester_percentage_estudiantes_semestre__semestre__porcentaje_min__porcentaje_min__get",
+        "parameters": [
+          {
+            "name": "semestre",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Semestre"
+            }
+          },
+          {
+            "name": "porcentaje_min",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Porcentaje Min"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estudiantes/{carrera}/{materias_min}": {
+      "get": {
+        "summary": "Get Students By Degree Courses",
+        "description": "Tercer nivel: /estudiantes/{carrera}/{materias_min}\n\nParámteros de path:\n- carrera: Nombre de la carrera.\n- materias_min: Número mínimo de materias aprobadas.\n\nRetorna:\n    Lista de coincidencias o dict de error.",
+        "operationId": "get_students_by_degree_courses_estudiantes__carrera___materias_min__get",
+        "parameters": [
+          {
+            "name": "carrera",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Carrera"
+            }
+          },
+          {
+            "name": "materias_min",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Materias Min"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estudiantes/genero/{genero}/creditos_max/{creditos_max}": {
+      "get": {
+        "summary": "Get Students By Gender Credits",
+        "description": "Tercer nivel: /estudiantes/genero/{genero}/creditos_max/{creditos_max}\n\nParámetros de path:\n- genero: Género del estudiante.\n- creditos_max: Máximo de créditos acumulados.\n\nRetorna:\n    Lista filtrada o dict de error.",
+        "operationId": "get_students_by_gender_credits_estudiantes_genero__genero__creditos_max__creditos_max__get",
+        "parameters": [
+          {
+            "name": "genero",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Genero"
+            }
+          },
+          {
+            "name": "creditos_max",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Creditos Max"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
